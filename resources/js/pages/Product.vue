@@ -26,7 +26,7 @@
                 <div class="row">
                     <h1 class="text-center mb-3">Ready Stock</h1>
                     <div class="col-12">
-                        <table class="table table-striped table-hover">
+                        <table class="table table-dark table-hover">
                             <thead>
                                 <tr>
                                   <th scope="col">No</th>
@@ -41,8 +41,8 @@
                                   <td>{{ product.nama }}</td>
                                   <td>{{ product.harga }}</td>
                                   <td>
-                                      <button type="button" :data-id="product.id" v-on:click="editProduct" :data-nama="product.nama" :data-harga="product.harga" class="btn btn-secondary">Edit</button>
-                                      <button type="button" :data-id="product.id" v-on:click="deleteProduct" class="btn btn-dager">Hapus</button>
+                                      <button type="button" :data-id="product.id" v-on:click="editProduct" :data-nama="product.nama" :data-harga="product.harga" class="btn btn-primary">Edit</button>
+                                      <button type="button" :data-id="product.id" v-on:click="deleteProduct" class="btn btn-danger">Hapus</button>
                                   </td>
                                 </tr>
                               </tbody>
@@ -92,7 +92,6 @@
                      fetch(baseUrl+"/api/product/add", requestOptions)
                         .then(response => response.json())
                         .then(data => this.products.push(data));
-                    this.clearProduct();
                 }
             },
 
@@ -109,11 +108,6 @@
                 this.harga = event.target.getAttribute('data-harga');
             },
 
-            clearProduct: function () {
-                this.nama = ''
-                this.harga = ''
-            },
-
             updateProduct: function() {
                 if (this.nama && this.harga  && this.id) {
                     const requestOptions = {
@@ -128,7 +122,6 @@
                      fetch(baseUrl+"/api/product/edit/"+this.id, requestOptions)
                         .then(response => response.json())
                     this.getProduct();
-                    this.clearProduct();
                     alert('update successfully')
                 }
             }
